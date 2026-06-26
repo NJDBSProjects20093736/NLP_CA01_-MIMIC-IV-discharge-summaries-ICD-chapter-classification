@@ -1,0 +1,76 @@
+data/mimic_icd_sample.csv — Dataset documentation
+=================================================
+
+Purpose
+-------
+Main modelling dataset for CA01 Task 2 (MIMIC-IV ICD chapter classification).
+One row = one hospital admission discharge summary linked to its primary ICD diagnosis.
+
+Built by:  code/build_mimic_icd_sample.py
+Used in:   Section 2 EDA, Section 3–6 Python sklearn pipeline
+Related:   data/mimic_icd_for_ai_studio_oneline_v2.tsv (same rows; 2 columns for AI Studio)
+
+Summary
+-------
+  Rows:              9,990
+  Classes (label):   37 ICD chapters
+  Balance:           270 records per class (stratified sample)
+  Missing text:      0
+  Duplicate note_id: 0
+  Random seed:       42 (reproducible sampling)
+
+Source data (PhysioNet MIMIC-IV)
+--------------------------------
+  discharge.csv       MIMIC-IV-Note — de-identified discharge summary text
+  diagnoses_icd.csv   Primary ICD code per admission (seq_num = 1 only)
+  d_icd_diagnoses.csv Human-readable ICD titles
+  Join key:           hadm_id (hospital admission identifier)
+
+Column reference
+----------------
+
+text
+  Full de-identified discharge summary (raw clinical text).
+  Input feature for classification. May contain line breaks and ___ placeholders.
+  NOT preprocessed in this file — tokenisation happens in Section 3 (Python) or
+  inside AI Studio Auto Model.
+
+label
+  Target class: ICD chapter (grouped disease category).
+  Examples: ICD10-I (circulatory), ICD10-C (neoplasms), ICD9-Respiratory.
+  Same values as icd_chapter in the AI Studio TSV export.
+  37 unique chapter labels in this sample.
+
+primary_icd_code
+  Original primary ICD-9 or ICD-10 code for the admission (seq_num = 1).
+  Example: A419, I21, 5070.
+
+primary_icd_title
+  Long description of primary_icd_code from d_icd_diagnoses.csv.
+  Example: "Sepsis, unspecified organism".
+
+note_id
+  Unique discharge note identifier (MIMIC-IV-Note).
+  One note per row — no duplicates in the final sample.
+
+hadm_id
+  Hospital admission identifier. Used to join notes to diagnoses during build.
+  Integer key from MIMIC-IV hosp module.
+
+Example row (abbreviated)
+-----------------------
+  label:              ICD10-A
+  primary_icd_code:   A419
+  primary_icd_title:  Sepsis, unspecified organism
+  text:               "Chief Complaint: altered mental status..."
+
+Notes for modelling
+-------------------
+  - Chapter-level labels (not individual ICD codes) → 37-class multiclass task.
+  - Balanced sample does NOT reflect real hospital ICD prevalence.
+  - Planned split: 80/20 stratified hold-out; 10-fold CV for model selection.
+  - Load in Python: pd.read_csv("data/mimic_icd_sample.csv")
+
+Regenerate
+----------
+  python code/build_mimic_icd_sample.py

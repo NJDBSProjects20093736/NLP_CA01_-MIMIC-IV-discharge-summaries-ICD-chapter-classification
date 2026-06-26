@@ -1,0 +1,49 @@
+{
+  "n_documents": 9990,
+  "ngram_range": [
+    1,
+    2
+  ],
+  "max_features": 10000,
+  "svd_components": 200,
+  "representations": [
+    {
+      "name": "Count + n-grams (BoW)",
+      "shape_rows": 9990,
+      "shape_features": 10000,
+      "nonzero_pct": 8.2458,
+      "sparsity_pct": 91.75,
+      "fit_transform_seconds": 62.33
+    },
+    {
+      "name": "TF-IDF + n-grams",
+      "shape_rows": 9990,
+      "shape_features": 10000,
+      "nonzero_pct": 8.2458,
+      "sparsity_pct": 91.75,
+      "fit_transform_seconds": 62.72
+    },
+    {
+      "name": "TF-IDF + TruncatedSVD",
+      "shape_rows": 9990,
+      "shape_features": 200,
+      "nonzero_pct": 100.0,
+      "sparsity_pct": 0.0,
+      "fit_transform_seconds": 71.92
+    }
+  ],
+  "sample_features": {
+    "tfidf_vocab_head": [
+      "--",
+      "-- --",
+      "-- 12",
+      "-- 16",
+      "-- 25",
+      "-- 32",
+      "-- 64",
+      "-- ___",
+      "-- ampicillin",
+      "-- anaerobic"
+    ]
+  }
+}

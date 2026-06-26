@@ -1,0 +1,46 @@
+{
+  "source_file": "Results_All.csv",
+  "n_completed": 5,
+  "n_total": 5,
+  "models": [
+    {
+      "model": "Naive Bayes",
+      "classification_error": 0.6725,
+      "classification_error_std": 0.010458250331677,
+      "accuracy": 0.3275,
+      "status": "completed"
+    },
+    {
+      "model": "Generalized Linear Model",
+      "classification_error": 0.6475,
+      "classification_error_std": 0.0256173769149016,
+      "accuracy": 0.3525,
+      "status": "completed"
+    },
+    {
+      "model": "Logistic Regression",
+      "classification_error": 0.885,
+      "classification_error_std": 0.0104582503316703,
+      "accuracy": 0.115,
+      "status": "completed"
+    },
+    {
+      "model": "Fast Large Margin",
+      "classification_error": 0.565,
+      "classification_error_std": 0.0427565784412189,
+      "accuracy": 0.435,
+      "status": "completed"
+    },
+    {
+      "model": "Deep Learning",
+      "classification_error": 0.6900000000000001,
+      "classification_error_std": 0.0298433409657822,
+      "accuracy": 0.31,
+      "status": "completed"
+    }
+  ],
+  "best_model": "Fast Large Margin",
+  "best_accuracy": 0.435,
+  "best_classification_error": 0.565,
+  "notes": "Auto Model reports classification error (1 \u2212 accuracy). Full run completed: 2,114 models across 688 feature sets. Best AI Studio model: Fast Large Margin (accuracy ~43.5%). Logistic Regression error 0.885 (accuracy 11.5%) is treated as unreliable on this 37-class task."
+}

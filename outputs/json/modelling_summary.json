@@ -1,0 +1,59 @@
+{
+  "n_splits": 10,
+  "n_documents": 9990,
+  "n_classes": 37,
+  "model_results": [
+    {
+      "model": "Count + NB",
+      "accuracy": 0.4563563563563563,
+      "accuracy_std": 0.011668855480047743,
+      "precision_weighted": 0.47374444710220126,
+      "recall_weighted": 0.4563563563563563,
+      "f1_weighted": 0.4490177388550583,
+      "f1_std": 0.011469056615457943,
+      "cv_seconds": 104.1
+    },
+    {
+      "model": "TF-IDF + NB",
+      "accuracy": 0.4415415415415415,
+      "accuracy_std": 0.009416328680775911,
+      "precision_weighted": 0.4617334673487953,
+      "recall_weighted": 0.4415415415415415,
+      "f1_weighted": 0.42194394242877,
+      "f1_std": 0.010020869360492552,
+      "cv_seconds": 100.9
+    },
+    {
+      "model": "TF-IDF + LogReg",
+      "accuracy": 0.5254254254254255,
+      "accuracy_std": 0.013793851906937032,
+      "precision_weighted": 0.5366025521357913,
+      "recall_weighted": 0.5254254254254255,
+      "f1_weighted": 0.5196774425188047,
+      "f1_std": 0.014190522734184365,
+      "cv_seconds": 121.1
+    },
+    {
+      "model": "TF-IDF + SVM",
+      "accuracy": 0.5608608608608608,
+      "accuracy_std": 0.011084024013013229,
+      "precision_weighted": 0.559720167269914,
+      "recall_weighted": 0.5608608608608608,
+      "f1_weighted": 0.5543359633587293,
+      "f1_std": 0.012092515978945536,
+      "cv_seconds": 108.8
+    },
+    {
+      "model": "TF-IDF+SVD + LogReg",
+      "accuracy": 0.4918918918918919,
+      "accuracy_std": 0.0137774979251934,
+      "precision_weighted": 0.5038459855873082,
+      "recall_weighted": 0.4918918918918919,
+      "f1_weighted": 0.4846821959333695,
+      "f1_std": 0.014279205638537143,
+      "cv_seconds": 126.6
+    }
+  ],
+  "best_model": "TF-IDF + SVM",
+  "holdout_classification_report": "                      precision    recall  f1-score   support\n\n             ICD10-A       0.42      0.44      0.43        54\n             ICD10-B       0.43      0.54      0.48        54\n             ICD10-C       0.41      0.56      0.47        54\n             ICD10-D       0.47      0.48      0.48        54\n             ICD10-E       0.47      0.57      0.52        54\n             ICD10-F       0.74      0.78      0.76        54\n             ICD10-G       0.38      0.31      0.34        54\n             ICD10-H       0.76      0.89      0.82        54\n             ICD10-I       0.63      0.57      0.60        54\n             ICD10-J       0.57      0.72      0.63        54\n             ICD10-K       0.43      0.56      0.49        54\n             ICD10-L       0.53      0.56      0.54        54\n             ICD10-M       0.55      0.63      0.59        54\n             ICD10-N       0.46      0.50      0.48        54\n             ICD10-O       0.86      0.80      0.83        54\n             ICD10-Q       0.68      0.67      0.67        54\n             ICD10-R       0.41      0.26      0.32        54\n             ICD10-S       0.74      0.89      0.81        54\n             ICD10-T       0.35      0.17      0.23        54\n             ICD10-Z       0.69      0.69      0.69        54\n          ICD9-Blood       0.59      0.72      0.65        54\n    ICD9-Circulatory       0.59      0.63      0.61        54\n     ICD9-Congenital       0.55      0.41      0.47        54\n      ICD9-Digestive       0.43      0.37      0.40        54\n      ICD9-Endocrine       0.58      0.48      0.53        54\n  ICD9-Genitourinary       0.56      0.50      0.53        54\n     ICD9-Infectious       0.38      0.33      0.36        54\n         ICD9-Injury       0.56      0.37      0.44        54\n         ICD9-Mental       0.79      0.78      0.79        54\nICD9-Musculoskeletal       0.48      0.56      0.51        54\n      ICD9-Neoplasms       0.50      0.50      0.50        54\n        ICD9-Nervous       0.64      0.52      0.57        54\n      ICD9-Pregnancy       0.84      0.76      0.80        54\n    ICD9-Respiratory       0.58      0.72      0.64        54\n           ICD9-Skin       0.67      0.67      0.67        54\nICD9-Supplementary-V       0.63      0.63      0.63        54\n       ICD9-Symptoms       0.36      0.28      0.31        54\n\n            accuracy                           0.56      1998\n           macro avg       0.56      0.56      0.56      1998\n        weighted avg       0.56      0.56      0.56      1998\n"
+}
