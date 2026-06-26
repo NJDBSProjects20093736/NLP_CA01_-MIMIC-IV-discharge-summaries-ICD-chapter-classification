@@ -1,59 +1,50 @@
-# CA01 Task 2 — MIMIC ICD Chapter Classifier
+CA01 Task 2 — MIMIC ICD Chapter Classifier
 
-This project builds a supervised NLP classifier for predicting ICD chapter labels from MIMIC-IV discharge summaries. It follows the CRISP-DM workflow:
+A Natural Language Processing project for predicting ICD chapter labels from MIMIC-IV discharge summaries using supervised machine learning.
 
-**Data Understanding → Data Preparation → Modelling → Evaluation → Deployment**
+This project follows the CRISP-DM workflow:
 
-The final model is a Python `scikit-learn` pipeline using **TF-IDF + Linear SVM**, compared against an **Altair AI Studio Auto Model** benchmark.
+Data Understanding → Data Preparation → Modelling → Evaluation → Deployment
 
----
+The final Python model is a scikit-learn pipeline using TF-IDF + Linear SVM, compared against an Altair AI Studio Auto Model benchmark.
 
-## 1. Project Overview
+Project Overview
 
-The aim of this project is to classify discharge summary text into ICD chapter labels. The project uses discharge summaries from MIMIC-IV-Note and diagnosis information from MIMIC-IV.
+This project builds an ICD chapter classifier using discharge summary text from MIMIC-IV-Note linked with diagnosis information from MIMIC-IV.
+
+The task is a 37-class multiclass text classification problem, where each discharge summary is mapped to one ICD chapter label.
 
 The project includes:
 
-* Dataset construction from MIMIC-IV files
-* Exploratory data analysis
-* Text preprocessing
-* Text representation using CountVectorizer, TF-IDF, and TF-IDF + SVD
-* Classifier comparison using 10-fold stratified cross-validation
-* AI Studio Auto Model benchmark comparison
-* Hold-out evaluation and confusion analysis
-* Human-in-the-loop deployment demonstration
+MIMIC-IV dataset construction
+Exploratory data analysis
+Text preprocessing
+CountVectorizer, TF-IDF, and TF-IDF + SVD representations
+Supervised classifier comparison
+10-fold stratified cross-validation
+Altair AI Studio Auto Model benchmark
+Hold-out evaluation and confusion analysis
+Human-in-the-loop deployment demo
+Final Model
 
----
+The best Python model was:
 
-## 2. Setup Instructions
+TF-IDF + LinearSVC
 
-### Requirements
+Expected performance:
 
-* Python 3.10 or higher
-* Required Python libraries listed in `requirements.txt`
+Accuracy: approximately 56%
+Weighted F1: approximately 0.55
 
-### Installation
+The best AI Studio benchmark model was:
 
-From the project root folder, run:
-
-```bash
-pip install -r requirements.txt
-```
-
-Download the required NLTK resources:
-
-```bash
-python -c "import nltk; nltk.download('punkt'); nltk.download('stopwords'); nltk.download('wordnet')"
-```
-
----
-
-## 3. Project Structure
-
-```text
+Fast Large Margin
+Accuracy: approximately 43.5%
+Classification error: approximately 56.5%
+Project Structure
 data/                          Input datasets and processed CSV/TSV files
 models/                        Saved trained model pipeline
-shared/                        Shared helper code for paths, preprocessing, and representations
+shared/                        Shared helper code
 outputs/figures/               Generated figures and charts
 outputs/json/                  Generated metrics and summaries
 
@@ -62,354 +53,253 @@ section3_data_preparation/     Text preprocessing and feature representation
 section4_modelling/            Classifier comparison and model training
 section5_evaluation/           Evaluation metrics, confusion analysis, and benchmarks
 section6_deployment/           Prediction demo and deployment workflow
-```
+Setup
+1. Create and activate a Python environment
+python -m venv .venv
 
----
+Windows:
 
-## 4. How to Run the Project
+.venv\Scripts\activate
 
-Run the scripts from the project root folder in the order below.
+macOS/Linux:
 
----
+source .venv/bin/activate
+2. Install dependencies
+pip install -r requirements.txt
+3. Download NLTK resources
+python -c "import nltk; nltk.download('punkt'); nltk.download('stopwords'); nltk.download('wordnet')"
+How to Run
 
-## 4.1 Data Understanding
+Run all scripts from the project root folder.
 
-### Step 1: Build the MIMIC ICD Sample
-
-This step creates the final project dataset from the raw MIMIC-IV files.
-
-```bash
+Step 1 — Build the MIMIC ICD Sample
 python section2_data_understanding/build_mimic_icd_sample.py
-```
 
-**Needs:**
+This script builds the final project dataset from raw MIMIC-IV files.
 
-Raw MIMIC-IV files in the raw data folder:
+Required raw files:
 
-```text
 discharge.csv
 diagnoses_icd.csv
 d_icd_diagnoses.csv
-```
 
-**Produces:**
+Outputs:
 
-```text
 data/mimic_icd_sample.csv
 data/mimic_icd_for_ai_studio_oneline_v2.tsv
 data/mimic_icd_sample.README.txt
-```
 
-The CSV file contains the main modelling dataset. The TSV file is formatted for upload to Altair AI Studio.
+The TSV file is used for the Altair AI Studio Auto Model benchmark.
 
----
-
-### Step 2: Run Exploratory Data Analysis
-
-```bash
+Step 2 — Run Exploratory Data Analysis
 python section2_data_understanding/run_eda.py
-```
 
-**Needs:**
+Outputs:
 
-```text
-data/mimic_icd_sample.csv
-```
-
-**Produces:**
-
-```text
 outputs/figures/fig1_class_distribution.png
 outputs/figures/fig2_word_count_hist.png
 outputs/figures/fig3_word_count_by_class.png
 data/class_counts.csv
 data/kmeans_cluster_vs_label.csv
-```
 
-This step also prints summary information to the console, including row counts, number of classes, vocabulary information, and sample text excerpts.
+This step explores the dataset size, class distribution, vocabulary, word counts, and sample discharge summaries.
 
----
-
-## 4.2 Data Preparation
-
-### Step 3: Run Text Preprocessing
-
-```bash
+Step 3 — Run Text Preprocessing
 python section3_data_preparation/run_preprocessing.py
-```
 
-**Needs:**
+Outputs:
 
-```text
-data/mimic_icd_sample.csv
-```
-
-**Produces:**
-
-```text
 outputs/json/preprocessing_summary.json
 outputs/figures/fig4_preprocessing_pipeline.png
 outputs/figures/fig4_token_counts_before_after.png
-```
 
-This step demonstrates the preprocessing process used for the discharge summary text.
+This step demonstrates the text cleaning and preprocessing workflow.
 
----
-
-### Step 4: Generate Text Representations
-
-```bash
+Step 4 — Generate Text Representations
 python section3_data_preparation/run_representations.py
-```
 
-**Needs:**
+Outputs:
 
-```text
-data/mimic_icd_sample.csv
-```
-
-**Produces:**
-
-```text
 outputs/json/representations_summary.json
 outputs/figures/fig5_matrix_shapes.png
 outputs/figures/fig5_sparsity.png
-```
 
-This step creates and compares CountVectorizer, TF-IDF, and TF-IDF + SVD representations.
+This step compares different text representations:
 
----
-
-## 4.3 Modelling
-
-### Step 5: Train and Compare Classifiers
-
-```bash
+CountVectorizer
+TF-IDF
+TF-IDF + TruncatedSVD
+Step 5 — Train and Compare Models
 python section4_modelling/run_modelling.py
-```
 
-**Needs:**
+Outputs:
 
-```text
-data/mimic_icd_sample.csv
-```
-
-**Produces:**
-
-```text
 models/best_model.pkl
 outputs/json/modelling_summary.json
 outputs/figures/fig6_cv_results.png
 outputs/figures/fig6_confusion_matrix.png
-```
 
-This step compares the Python modelling pipelines using 10-fold stratified cross-validation.
+The following pipelines are compared:
 
-The tested pipelines include:
+Pipeline	Text Representation	Classifier
+Count + NB	CountVectorizer	Multinomial Naive Bayes
+TF-IDF + NB	TF-IDF	Multinomial Naive Bayes
+TF-IDF + Logistic Regression	TF-IDF	Logistic Regression
+TF-IDF + SVM	TF-IDF	LinearSVC
+TF-IDF + SVD + Logistic Regression	TF-IDF + TruncatedSVD	Logistic Regression
 
-* Count + Naive Bayes
-* TF-IDF + Naive Bayes
-* TF-IDF + Logistic Regression
-* TF-IDF + Linear SVM
-* TF-IDF + SVD + Logistic Regression
+The selected model is saved as:
 
-The expected best model is:
-
-```text
-TF-IDF + LinearSVC
-```
-
----
-
-## 4.4 AI Studio Benchmark
+models/best_model.pkl
+AI Studio Auto Model Benchmark
 
 Altair AI Studio Auto Model is used as the required benchmark workflow.
 
-### AI Studio Input File
+Upload this file to AI Studio:
 
-Upload the following file to AI Studio:
-
-```text
 data/mimic_icd_for_ai_studio_oneline_v2.tsv
-```
 
-### AI Studio Configuration
+Recommended AI Studio setup:
 
-Use:
-
-```text
 Target: icd_chapter
 Input: text
 Task: Classification
 Text extraction: enabled
 Extracted text features: 1,000
 Automatic feature selection: enabled
-```
 
 Enabled model types:
 
-* Naive Bayes
-* Generalized Linear Model
-* Logistic Regression
-* Fast Large Margin
-* Deep Learning
+Naive Bayes
+Generalized Linear Model
+Logistic Regression
+Fast Large Margin
+Deep Learning
 
-After running Auto Model, export the results file as:
+After running Auto Model, export the results as:
 
-```text
 data/Results_All.csv
-```
 
 Then import the AI Studio results into the Python project:
 
-```bash
 python section5_evaluation/import_ai_studio_results.py
-```
 
-**Needs:**
+Outputs:
 
-```text
-data/Results_All.csv
-```
-
-**Produces:**
-
-```text
 outputs/json/ai_studio_results.json
 outputs/figures/fig3_ai_studio_results.png
-```
+Evaluation
 
----
+Run the evaluation script:
 
-## 4.5 Evaluation
-
-### Step 6: Run Hold-out Evaluation and Benchmark Comparison
-
-```bash
 python section5_evaluation/run_evaluation.py
-```
 
-**Needs:**
+Outputs:
 
-```text
-data/mimic_icd_sample.csv
-models/best_model.pkl
-outputs/json/modelling_summary.json
-outputs/json/ai_studio_results.json
-```
-
-**Produces:**
-
-```text
 outputs/json/evaluation_summary.json
 outputs/figures/fig7_per_class_f1.png
 outputs/figures/fig7_benchmark_comparison.png
 outputs/figures/fig7_top_confusions.png
-```
 
-This step evaluates the selected TF-IDF + SVM model on a 20% stratified hold-out test set. It also compares the Python model against the AI Studio Auto Model benchmark.
+The evaluation includes:
 
----
-
-## 4.6 Deployment
-
-### Step 7: Generate Deployment Workflow Figure
-
-```bash
+20% stratified hold-out test evaluation
+Classification report
+Per-class F1 analysis
+Confusion matrix
+Frequent misclassification pairs
+Benchmark comparison with AI Studio Auto Model
+Deployment Demo
+Generate Human-in-the-Loop Workflow Figure
 python section6_deployment/generate_deployment_workflow_figure.py
-```
 
-**Produces:**
+Output:
 
-```text
 outputs/figures/fig6_deployment_workflow.png
-```
-
-This figure shows the proposed human-in-the-loop deployment workflow.
-
----
-
-### Step 8: Run Demo Prediction Script
-
-```bash
+Run Prediction Demo
 python section6_deployment/run_predict_demo.py
-```
 
-**Needs:**
+Outputs:
 
-```text
-models/best_model.pkl
-data/mimic_icd_sample.csv
-```
-
-**Produces:**
-
-```text
 outputs/figures/fig6_predict_demo_console.png
-```
 
-This script loads the saved model and predicts ICD chapter labels for sample discharge summaries.
+The demo loads the saved model and predicts an ICD chapter for sample discharge summary text.
 
----
+Example prediction structure:
 
-## 5. Expected Results
+import joblib
 
-The expected best Python model is:
+pipe = joblib.load("models/best_model.pkl")
 
-```text
-TF-IDF + LinearSVC
-```
+text = "Patient admitted with chest pain and shortness of breath..."
+label = pipe.predict([text])[0]
 
-Typical performance:
+print("Suggested ICD chapter:", label)
+Human-in-the-Loop Use
 
-```text
-Accuracy: approximately 56%
-Weighted F1: approximately 0.55
-```
+This classifier is designed as a decision-support tool, not a replacement for certified clinical coders or clinicians.
 
-The best AI Studio Auto Model benchmark is expected to be:
+In a real workflow:
 
-```text
-Fast Large Margin
-Accuracy: approximately 43.5%
-Classification error: approximately 56.5%
-```
+A discharge summary is exported from the EHR or coding queue.
+The saved model predicts a suggested ICD chapter.
+A clinical coder reviews the prediction.
+The final ICD code is assigned by the human coder.
+Low-confidence or weak-category predictions are flagged for mandatory review.
 
----
+The model predicts broad ICD chapter labels only. It does not predict complete ICD-9 or ICD-10 codes.
 
-## 6. Key Output Files
+Limitations
 
-Important generated outputs include:
+Key limitations include:
 
-```text
+The model predicts ICD chapters, not full ICD codes.
+The dataset is a balanced academic sample, not a natural hospital distribution.
+The model was trained on de-identified MIMIC-IV data from a US hospital setting.
+External validation would be required before real clinical deployment.
+TF-IDF + SVM may miss deeper clinical context and long-range relationships.
+Human review is required before any prediction could influence official coding.
+Key Outputs
+
+Important generated files:
+
 models/best_model.pkl
 outputs/json/modelling_summary.json
 outputs/json/evaluation_summary.json
 outputs/json/ai_studio_results.json
+
 outputs/figures/fig6_cv_results.png
 outputs/figures/fig7_per_class_f1.png
 outputs/figures/fig7_benchmark_comparison.png
 outputs/figures/fig7_top_confusions.png
 outputs/figures/fig6_deployment_workflow.png
 outputs/figures/fig6_predict_demo_console.png
-```
+Reproducibility
 
----
+The project uses fixed random seeds where applicable:
 
-## 7. Notes on Deployment
-
-The saved model is intended for demonstration and decision-support use only. It predicts broad ICD chapter labels, not full ICD-9 or ICD-10 codes. In a real clinical coding workflow, predictions should always be reviewed by a qualified clinical coder before official use.
-
-The model should not be used as a fully automated clinical coding system without further validation, external testing, monitoring, and governance.
-
----
-
-## 8. Reproducibility Notes
-
-The project uses fixed random seeds where applicable, including:
-
-```text
 random_state = 42
-```
 
-The Python modelling workflow uses 10-fold stratified cross-validation to support fair model comparison across all ICD chapter classes.
+The main Python model comparison uses:
+
+10-fold StratifiedKFold cross-validation
+shuffle = True
+random_state = 42
+Technologies Used
+Python
+pandas
+NumPy
+scikit-learn
+NLTK
+matplotlib
+joblib
+Altair AI Studio Auto Model
+References
+MIMIC-IV
+MIMIC-IV-Note
+scikit-learn
+Altair AI Studio Auto Model
+DBS B9AI006 NLP CA01 assessment materials
+Disclaimer
+
+This project is for academic use only. It is not a certified clinical coding tool and should not be used for official diagnosis, billing, or healthcare decision-making without further validation, governance, and expert human review.
