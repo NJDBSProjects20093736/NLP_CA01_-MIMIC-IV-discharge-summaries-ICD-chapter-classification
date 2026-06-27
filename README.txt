@@ -1,4 +1,4 @@
-CA01 Task 2 — MIMIC ICD Chapter Classifier
+MIMIC ICD Chapter Classifier
 
 A Natural Language Processing project for predicting ICD chapter labels from MIMIC-IV discharge summaries using supervised machine learning.
 
@@ -25,6 +25,7 @@ Supervised classifier comparison
 Altair AI Studio Auto Model benchmark
 Hold-out evaluation and confusion analysis
 Human-in-the-loop deployment demo
+Optional beyond-class Bio_ClinicalBERT extension (Appendix A)
 Final Model
 
 The best Python model was:
@@ -53,6 +54,7 @@ section3_data_preparation/     Text preprocessing and feature representation
 section4_modelling/            Classifier comparison and model training
 section5_evaluation/           Evaluation metrics, confusion analysis, and benchmarks
 section6_deployment/           Prediction demo and deployment workflow
+Advanced Extension - Phase1/   Optional beyond-class BERT experiments (Appendix A)
 Setup
 1. Create and activate a Python environment
 python -m venv .venv
@@ -235,6 +237,25 @@ text = "Patient admitted with chest pain and shortness of breath..."
 label = pipe.predict([text])[0]
 
 print("Suggested ICD chapter:", label)
+Advanced Extension (Appendix A)
+
+An optional beyond-class extension is provided in Advanced Extension - Phase1/.
+It evaluates whether Bio_ClinicalBERT can improve ICD chapter prediction relative
+to the main TF-IDF + LinearSVC pipeline. This work is reported in Appendix A and
+does not replace models/best_model.pkl.
+
+Two experiments were run:
+
+Phase 1 (frozen embeddings, 999-note subset):
+  TF-IDF + LinearSVC weighted F1: 0.349
+  Bio_ClinicalBERT + LogReg weighted F1: 0.210
+
+Fine-tuning (full 9,990 notes, same 80/20 split):
+  TF-IDF + LinearSVC weighted F1: 0.558
+  Fine-tuned Bio_ClinicalBERT weighted F1: 0.318
+
+TF-IDF + LinearSVC was retained as the selected model. See Advanced Extension - Phase1/README.txt for scripts, setup, and outputs.
+
 Human-in-the-Loop Use
 
 This classifier is designed as a decision-support tool, not a replacement for certified clinical coders or clinicians.
@@ -274,6 +295,7 @@ outputs/figures/fig7_benchmark_comparison.png
 outputs/figures/fig7_top_confusions.png
 outputs/figures/fig6_deployment_workflow.png
 outputs/figures/fig6_predict_demo_console.png
+Advanced Extension - Phase1/outputs/figures/bert_finetune_comparison.png
 Reproducibility
 
 The project uses fixed random seeds where applicable:
@@ -294,6 +316,7 @@ NLTK
 matplotlib
 joblib
 Altair AI Studio Auto Model
+Bio_ClinicalBERT (Alsentzer et al., 2019) — advanced extension only
 References
 MIMIC-IV
 MIMIC-IV-Note

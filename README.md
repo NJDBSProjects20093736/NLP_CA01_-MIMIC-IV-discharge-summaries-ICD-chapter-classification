@@ -17,6 +17,7 @@ A supervised NLP pipeline that classifies MIMIC-IV discharge summaries into **37
 | **Dataset** | 9,990 stratified records (270 per class) |
 | **Best Python model** | TF-IDF + `LinearSVC` |
 | **Best AI Studio model** | Fast Large Margin |
+| **Advanced extension** | Bio_ClinicalBERT (Appendix A) — TF-IDF + SVM retained |
 
 ### Results
 
@@ -51,6 +52,7 @@ A supervised NLP pipeline that classifies MIMIC-IV discharge summaries into **37
 ├── section4_modelling/                Classifier comparison & training
 ├── section5_evaluation/                 Hold-out evaluation & benchmarks
 ├── section6_deployment/               Workflow figure & prediction demo
+├── Advanced Extension - Phase1/       Optional beyond-class BERT experiments
 ├── requirements.txt
 └── README.md
 ```
@@ -273,6 +275,19 @@ print("Suggested ICD chapter:", label)
 
 ---
 
+## Advanced extension (Appendix A)
+
+An optional beyond-class extension in `Advanced Extension - Phase1/` evaluates whether **Bio_ClinicalBERT** can improve ICD chapter prediction relative to the main TF-IDF + SVM pipeline. It is documented in **Appendix A** of the written report and does not replace `models/best_model.pkl`.
+
+| Experiment | Description | Weighted F1 (BERT) | Weighted F1 (TF-IDF + SVM) |
+|------------|-------------|--------------------|-----------------------------|
+| Phase 1 — frozen embeddings | 999-note stratified subset | 0.210 | 0.349 |
+| Fine-tuning — full dataset | 9,990 notes, same 80/20 split | 0.318 | 0.558 |
+
+**Conclusion:** TF-IDF + `LinearSVC` remains the selected model. See `Advanced Extension - Phase1/README.md` for setup, scripts (`run_bert_poc.py`, `run_bert_finetune.py`), and full outputs.
+
+---
+
 ## Workflow diagram
 
 ```mermaid
@@ -297,6 +312,7 @@ The classifier is **decision-support only** — not a replacement for certified 
 | `outputs/json/ai_studio_results.json` | AI Studio benchmark summary |
 | `outputs/figures/fig7_benchmark_comparison.png` | Python vs AI Studio chart |
 | `outputs/figures/fig6_deployment_workflow.png` | Human-in-the-loop workflow |
+| `Advanced Extension - Phase1/outputs/figures/bert_finetune_comparison.png` | Appendix A — BERT vs TF-IDF comparison |
 
 ---
 
@@ -331,12 +347,19 @@ Python · pandas · NumPy · scikit-learn · NLTK · matplotlib · seaborn · jo
 - Johnson, A. et al. (2023). [MIMIC-IV-Note](https://doi.org/10.13026/1n74-ne17). PhysioNet.
 - Pedregosa, F. et al. (2011). [scikit-learn](https://jmlr.org/papers/v12/pedregosa11a.html). *JMLR*.
 - Dublin Business School (2026). B9AI006 NLP CA01 assessment brief & AutoModelling benchmark materials.
+- Alsentzer, E. et al. (2019). [Publicly available clinical BERT embeddings](https://aclanthology.org/W19-1909/). *Clinical NLP Workshop*, pp. 72–78.
 
 ---
 
 ## Disclaimer
 
 This project is for **academic use only**. It is not a certified clinical coding tool and must not be used for official diagnosis, billing, or healthcare decision-making without further validation, governance, and expert human review.
+
+---
+
+## Acknowledgments
+
+Thanks to **Terri Hoare**, NLP Programme Coordinator at Dublin Business School, for setting the CA01 assessment, providing module guidance, and supporting access to the MIMIC-IV dataset used in this project.
 
 ---
 
