@@ -2,9 +2,6 @@
 """
 Bio_ClinicalBERT feature extraction for discharge summaries.
 
-Used by run_bert_poc.py (Phase 1). Loads a pretrained clinical transformer from
-Hugging Face and converts each note to a fixed-size embedding vector using
-mean pooling over token representations (max 512 tokens per note).
 """
 from __future__ import annotations
 

@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-CA01 Task 2 — Section 3.6: Text representation builders
-=========================================================
-Three required representations for sklearn modelling (Section 4):
-  1. Count / Bag-of-Words (CountVectorizer + bigrams)
-  2. TF-IDF (TfidfVectorizer + bigrams)
-  3. TF-IDF + TruncatedSVD (dimensionality reduction)
+Text representation builders
+
 """
 from sklearn.decomposition import TruncatedSVD
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer

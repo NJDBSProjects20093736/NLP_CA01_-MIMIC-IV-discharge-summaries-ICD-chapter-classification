@@ -2,8 +2,6 @@
 """
 PyTorch dataset for Bio_ClinicalBERT fine-tuning.
 
-Used by run_bert_finetune.py. Tokenises discharge summary text and returns
-input_ids, attention_mask, and integer class labels for the Hugging Face Trainer.
 """
 from __future__ import annotations
 

@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+
 """Shared path constants for the MIMIC ICD chapter classifier project."""
 import os
 

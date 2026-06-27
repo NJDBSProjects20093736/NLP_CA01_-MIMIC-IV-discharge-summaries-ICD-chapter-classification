@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-Path constants for the Advanced submission package (Appendix A).
+Path constants for the Advanced submission package.
 
-Works when this folder lives inside the GitHub repo (../data/) or beside
-the local CA01 Submission folder (../../Submission/data/).
 """
 import os
 

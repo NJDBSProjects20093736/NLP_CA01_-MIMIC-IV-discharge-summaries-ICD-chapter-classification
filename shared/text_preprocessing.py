@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-CA01 Task 2 — Section 3: Clinical text preprocessing (Python / sklearn)
-=======================================================================
-Used inside sklearn Pipelines in Sections 4–6. AI Studio uses raw text
-and performs its own feature extraction inside Auto Model (Section 4.1).
+ Clinical text preprocessing (Python / sklearn)
+
 """
 import re
 

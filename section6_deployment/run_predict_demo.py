@@ -2,14 +2,6 @@
 """
 Deployment — Load saved model and predict on sample discharge summaries.
 
-NEEDS:  models/best_model.pkl
-        data/mimic_icd_sample.csv
-
-PRODUCES: console predictions (printed to terminal)
-          outputs/figures/fig6_predict_demo_console.png (terminal screenshot)
-
-Run:
-    python section6_deployment/run_predict_demo.py
 """
 import os
 import sys

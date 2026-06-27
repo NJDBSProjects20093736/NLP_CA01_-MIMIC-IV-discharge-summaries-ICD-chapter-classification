@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+
 """
 Dataset build script 
 ==============================================================
@@ -197,7 +197,7 @@ def main():
     
     # mimic_icd_sample.csv — main dataset (refer data/mimic_icd_sample.README.txt)
     #   text               : discharge summary (model input; raw text)
-    #   label              : ICD chapter target (37 classes, e.g. ICD10-I)
+    #   label              : ICD chapter target (37 classes)
     #   primary_icd_code   : original primary ICD code (seq_num = 1)
     #   primary_icd_title  : diagnosis title from d_icd_diagnoses
     #   note_id            : unique note identifier

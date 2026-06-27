@@ -1,22 +1,8 @@
 
 """
-Advanced Appendix A — Phase 1 clinical BERT proof of concept.
-
 Frozen Bio_ClinicalBERT embeddings on a 999-note stratified subset, compared
 against TF-IDF + LinearSVC on the same 80/20 hold-out split.
 
-NEEDS:  ../data/mimic_icd_sample.csv
-        (or ../../Submission/data/mimic_icd_sample.csv locally)
-        GPU recommended (CUDA)
-
-PRODUCES: outputs/json/bert_poc_summary.json
-          outputs/figures/bert_poc_comparison.png
-          outputs/cache/poc_stratified_sample.csv
-          outputs/cache/bert_embeddings_train.npy
-          outputs/cache/bert_embeddings_test.npy
-
-Run from Advanced submission/:
-    python run_bert_poc.py
 """
 from __future__ import annotations
 
