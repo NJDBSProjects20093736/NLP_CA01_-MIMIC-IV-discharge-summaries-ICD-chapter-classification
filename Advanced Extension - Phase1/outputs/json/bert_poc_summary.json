@@ -1,0 +1,53 @@
+{
+  "phase": "Advanced Phase 1 \u2014 proof of concept",
+  "note": "Separate experiment; main pipeline unchanged. POC metrics are on a stratified subset only \u2014 not directly comparable to full-dataset CV without scaling to all 9,990 notes.",
+  "data_source": "D:\\DBS - Sem 2\\NLP\\CA01\\Submission\\data\\mimic_icd_sample.csv",
+  "subset_csv": "D:\\DBS - Sem 2\\NLP\\CA01\\Advanced_phase1\\outputs\\cache\\poc_stratified_sample.csv",
+  "n_per_class": 27,
+  "n_subset": 999,
+  "n_classes": 37,
+  "split": "80/20 stratified hold-out, random_state=42",
+  "n_train": 799,
+  "n_test": 200,
+  "tfidf_baseline": {
+    "model": "TF-IDF + LinearSVC",
+    "metrics": {
+      "accuracy": 0.38,
+      "precision_weighted": 0.34047619047619043,
+      "recall_weighted": 0.38,
+      "f1_weighted": 0.3485414079384668
+    },
+    "train_seconds": 2.3
+  },
+  "bert_logreg": {
+    "metrics": {
+      "accuracy": 0.23,
+      "precision_weighted": 0.22555375180375178,
+      "recall_weighted": 0.23,
+      "f1_weighted": 0.21045768528856762
+    },
+    "model": "Bio_ClinicalBERT mean-pool + LogisticRegression",
+    "bert_model": "emilyalsentzer/Bio_ClinicalBERT",
+    "max_length": 512,
+    "embedding_dim": 768,
+    "embed_seconds": 41.59,
+    "classifier_train_seconds": 21.07
+  },
+  "main_project_reference": {
+    "model": "TF-IDF + SVM",
+    "scope": "full dataset (9,990 notes)",
+    "cv_metrics": {
+      "accuracy": 0.5608608608608608,
+      "precision_weighted": 0.559720167269914,
+      "recall_weighted": 0.5608608608608608,
+      "f1_weighted": 0.5543359633587293,
+      "f1_std": 0.012092515978945536
+    },
+    "holdout_metrics": {
+      "accuracy": 0.5620620620620621,
+      "precision_weighted": 0.5587014847973599,
+      "recall_weighted": 0.5620620620620621,
+      "f1_weighted": 0.5555079231332982
+    }
+  }
+}

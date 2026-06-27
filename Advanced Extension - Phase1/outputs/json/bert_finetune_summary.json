@@ -1,0 +1,296 @@
+{
+  "phase": "Advanced Level B \u2014 Bio_ClinicalBERT fine-tuning",
+  "note": "Beyond-class extension on the full 9,990-note stratified sample. Fair comparison uses the same 80/20 stratified hold-out split (random_state=42) for both TF-IDF + LinearSVC and fine-tuned Bio_ClinicalBERT. Main CA01 selected model remains the sklearn TF-IDF + SVM pipeline unless BERT clearly outperforms on this hold-out and justifies added complexity.",
+  "data_source": "D:\\DBS - Sem 2\\NLP\\CA01\\Submission\\data\\mimic_icd_sample.csv",
+  "n_rows": 9990,
+  "n_classes": 37,
+  "split": "80/20 stratified hold-out",
+  "random_state": 42,
+  "n_train": 7992,
+  "n_test": 1998,
+  "bert_model": "emilyalsentzer/Bio_ClinicalBERT",
+  "max_length": 512,
+  "training": {
+    "epochs_requested": 3,
+    "batch_size": 16,
+    "learning_rate": 2e-05,
+    "train_seconds": 1987.52,
+    "train_loss": 2.475425272623698,
+    "device": "cuda"
+  },
+  "tfidf_same_split": {
+    "model": "TF-IDF + LinearSVC (same 80/20 split)",
+    "metrics": {
+      "accuracy": 0.5625625625625625,
+      "precision_weighted": 0.5628813293136206,
+      "recall_weighted": 0.5625625625625625,
+      "f1_weighted": 0.5575815902558027
+    },
+    "train_seconds": 23.55
+  },
+  "bert_finetune": {
+    "model": "Fine-tuned Bio_ClinicalBERT",
+    "metrics": {
+      "accuracy": 0.36186186186186187,
+      "precision_weighted": 0.3303526601617744,
+      "recall_weighted": 0.36186186186186187,
+      "f1_weighted": 0.31765336096720315
+    },
+    "saved_model_dir": "D:\\DBS - Sem 2\\NLP\\CA01\\Advanced_phase1\\outputs\\cache\\bert_finetune_model"
+  },
+  "classification_report": {
+    "ICD10-A": {
+      "precision": 0.32142857142857145,
+      "recall": 0.16666666666666666,
+      "f1-score": 0.21951219512195122,
+      "support": 54.0
+    },
+    "ICD10-B": {
+      "precision": 0.29545454545454547,
+      "recall": 0.24074074074074073,
+      "f1-score": 0.2653061224489796,
+      "support": 54.0
+    },
+    "ICD10-C": {
+      "precision": 0.23076923076923078,
+      "recall": 0.1111111111111111,
+      "f1-score": 0.15,
+      "support": 54.0
+    },
+    "ICD10-D": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 54.0
+    },
+    "ICD10-E": {
+      "precision": 0.39215686274509803,
+      "recall": 0.37037037037037035,
+      "f1-score": 0.38095238095238093,
+      "support": 54.0
+    },
+    "ICD10-F": {
+      "precision": 0.16666666666666666,
+      "recall": 0.018518518518518517,
+      "f1-score": 0.03333333333333333,
+      "support": 54.0
+    },
+    "ICD10-G": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 54.0
+    },
+    "ICD10-H": {
+      "precision": 0.631578947368421,
+      "recall": 0.8888888888888888,
+      "f1-score": 0.7384615384615385,
+      "support": 54.0
+    },
+    "ICD10-I": {
+      "precision": 0.2608695652173913,
+      "recall": 0.2222222222222222,
+      "f1-score": 0.24,
+      "support": 54.0
+    },
+    "ICD10-J": {
+      "precision": 0.27631578947368424,
+      "recall": 0.3888888888888889,
+      "f1-score": 0.3230769230769231,
+      "support": 54.0
+    },
+    "ICD10-K": {
+      "precision": 0.2638888888888889,
+      "recall": 0.35185185185185186,
+      "f1-score": 0.30158730158730157,
+      "support": 54.0
+    },
+    "ICD10-L": {
+      "precision": 0.2,
+      "recall": 0.12962962962962962,
+      "f1-score": 0.15730337078651685,
+      "support": 54.0
+    },
+    "ICD10-M": {
+      "precision": 0.3181818181818182,
+      "recall": 0.12962962962962962,
+      "f1-score": 0.18421052631578946,
+      "support": 54.0
+    },
+    "ICD10-N": {
+      "precision": 0.28125,
+      "recall": 0.3333333333333333,
+      "f1-score": 0.3050847457627119,
+      "support": 54.0
+    },
+    "ICD10-O": {
+      "precision": 0.4878048780487805,
+      "recall": 0.37037037037037035,
+      "f1-score": 0.42105263157894735,
+      "support": 54.0
+    },
+    "ICD10-Q": {
+      "precision": 0.5142857142857142,
+      "recall": 0.6666666666666666,
+      "f1-score": 0.5806451612903226,
+      "support": 54.0
+    },
+    "ICD10-R": {
+      "precision": 0.3333333333333333,
+      "recall": 0.018518518518518517,
+      "f1-score": 0.03508771929824561,
+      "support": 54.0
+    },
+    "ICD10-S": {
+      "precision": 0.5769230769230769,
+      "recall": 0.8333333333333334,
+      "f1-score": 0.6818181818181818,
+      "support": 54.0
+    },
+    "ICD10-T": {
+      "precision": 0.3157894736842105,
+      "recall": 0.1111111111111111,
+      "f1-score": 0.1643835616438356,
+      "support": 54.0
+    },
+    "ICD10-Z": {
+      "precision": 0.6666666666666666,
+      "recall": 0.2962962962962963,
+      "f1-score": 0.41025641025641024,
+      "support": 54.0
+    },
+    "ICD9-Blood": {
+      "precision": 0.4235294117647059,
+      "recall": 0.6666666666666666,
+      "f1-score": 0.5179856115107914,
+      "support": 54.0
+    },
+    "ICD9-Circulatory": {
+      "precision": 0.375,
+      "recall": 0.3888888888888889,
+      "f1-score": 0.38181818181818183,
+      "support": 54.0
+    },
+    "ICD9-Congenital": {
+      "precision": 0.2857142857142857,
+      "recall": 0.07407407407407407,
+      "f1-score": 0.11764705882352941,
+      "support": 54.0
+    },
+    "ICD9-Digestive": {
+      "precision": 0.23404255319148937,
+      "recall": 0.4074074074074074,
+      "f1-score": 0.2972972972972973,
+      "support": 54.0
+    },
+    "ICD9-Endocrine": {
+      "precision": 0.37209302325581395,
+      "recall": 0.2962962962962963,
+      "f1-score": 0.32989690721649484,
+      "support": 54.0
+    },
+    "ICD9-Genitourinary": {
+      "precision": 0.16666666666666666,
+      "recall": 0.1111111111111111,
+      "f1-score": 0.13333333333333333,
+      "support": 54.0
+    },
+    "ICD9-Infectious": {
+      "precision": 0.16,
+      "recall": 0.2222222222222222,
+      "f1-score": 0.18604651162790697,
+      "support": 54.0
+    },
+    "ICD9-Injury": {
+      "precision": 0.25,
+      "recall": 0.018518518518518517,
+      "f1-score": 0.034482758620689655,
+      "support": 54.0
+    },
+    "ICD9-Mental": {
+      "precision": 0.45454545454545453,
+      "recall": 0.8333333333333334,
+      "f1-score": 0.5882352941176471,
+      "support": 54.0
+    },
+    "ICD9-Musculoskeletal": {
+      "precision": 0.34513274336283184,
+      "recall": 0.7222222222222222,
+      "f1-score": 0.46706586826347307,
+      "support": 54.0
+    },
+    "ICD9-Neoplasms": {
+      "precision": 0.27102803738317754,
+      "recall": 0.5370370370370371,
+      "f1-score": 0.36024844720496896,
+      "support": 54.0
+    },
+    "ICD9-Nervous": {
+      "precision": 0.25301204819277107,
+      "recall": 0.3888888888888889,
+      "f1-score": 0.30656934306569344,
+      "support": 54.0
+    },
+    "ICD9-Pregnancy": {
+      "precision": 0.5657894736842105,
+      "recall": 0.7962962962962963,
+      "f1-score": 0.6615384615384615,
+      "support": 54.0
+    },
+    "ICD9-Respiratory": {
+      "precision": 0.3617021276595745,
+      "recall": 0.6296296296296297,
+      "f1-score": 0.4594594594594595,
+      "support": 54.0
+    },
+    "ICD9-Skin": {
+      "precision": 0.4,
+      "recall": 0.8148148148148148,
+      "f1-score": 0.5365853658536586,
+      "support": 54.0
+    },
+    "ICD9-Supplementary-V": {
+      "precision": 0.5142857142857142,
+      "recall": 0.6666666666666666,
+      "f1-score": 0.5806451612903226,
+      "support": 54.0
+    },
+    "ICD9-Symptoms": {
+      "precision": 0.2571428571428571,
+      "recall": 0.16666666666666666,
+      "f1-score": 0.20224719101123595,
+      "support": 54.0
+    },
+    "accuracy": 0.36186186186186187,
+    "macro avg": {
+      "precision": 0.3303526601617744,
+      "recall": 0.36186186186186176,
+      "f1-score": 0.3176533609672031,
+      "support": 1998.0
+    },
+    "weighted avg": {
+      "precision": 0.3303526601617744,
+      "recall": 0.36186186186186187,
+      "f1-score": 0.31765336096720315,
+      "support": 1998.0
+    }
+  },
+  "main_project_reference": {
+    "model": "TF-IDF + SVM",
+    "scope": "full dataset \u2014 10-fold CV (main CA01)",
+    "cv_metrics": {
+      "accuracy": 0.5608608608608608,
+      "precision_weighted": 0.559720167269914,
+      "recall_weighted": 0.5608608608608608,
+      "f1_weighted": 0.5543359633587293,
+      "f1_std": 0.012092515978945536
+    },
+    "holdout_metrics": {
+      "accuracy": 0.5620620620620621,
+      "precision_weighted": 0.5587014847973599,
+      "recall_weighted": 0.5620620620620621,
+      "f1_weighted": 0.5555079231332982
+    }
+  },
+  "winner_same_split": "TF-IDF + LinearSVC"
+}
