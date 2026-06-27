@@ -359,7 +359,7 @@ This project is for **academic use only**. It is not a certified clinical coding
 
 ## Acknowledgments
 
-Thanks to **Terri Hoare**, NLP Programme Coordinator at Dublin Business School, for setting the CA01 assessment, providing module guidance, and supporting access to the MIMIC-IV dataset used in this project.
+Thanks to **Dr.Terri Hoare**, Natural Language Processing Programme Lecture at Dublin Business School, for setting the CA01 assessment, providing module guidance, and supporting access to the MIMIC-IV dataset used in this project.
 
 ---
 
